@@ -7,7 +7,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: stsoe/hello-world-docker-action@main
+      uses: ./.github/actions/hello-world
       with:
         who-to-greet: 'Mona the Octocat'
     # Use the output from the `hello` step
