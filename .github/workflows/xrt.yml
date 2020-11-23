@@ -16,8 +16,9 @@ jobs:
       run: git version
     - name: find files
       run: find ./xrt -type f
-    - name: install dependencies
+    - name: update
       run: sudo apt update
+    - name: install dependencies
       run: sudo ./xrt/src/runtime_src/tools/scripts/xrtdeps.sh
     - name: build
       run: ./xrt/build/build.sh -opt
