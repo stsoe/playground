@@ -5,10 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to retrieve XRT
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Checkout XRT
       uses: actions/checkout@v2
       with:
 	repository: stsoe/XRT
-	path: xrt
+	path: ./xrt
     - name: version
       run: git version
