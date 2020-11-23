@@ -14,3 +14,6 @@ jobs:
         path: ./xrt
     - name: version
       run: git version
+    - name: find files
+      run: find ./xrt -type f
+      
