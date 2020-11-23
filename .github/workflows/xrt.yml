@@ -1,0 +1,13 @@
+on: [push]
+
+jobs:
+  xrt_job:
+    runs-on: ubuntu-latest
+    name: A job to retrieve XRT
+    steps:
+    - name: Checkout XRT
+      uses: actions/checkout@v2
+      with:
+	repository: stsoe/XRT
+    - name: version
+      run: git version
