@@ -10,7 +10,7 @@ jobs:
     - name: Checkout XRT
       uses: actions/checkout@v2
       with:
-	repository: stsoe/XRT
-	path: ./xrt
+        repository: stsoe/XRT
+        path: ./xrt
     - name: version
       run: git version
