@@ -20,6 +20,5 @@ jobs:
     - name: install dependencies
       run: ./xrt/src/runtime_src/tools/scripts/xrtdeps.sh
     - name: build
+      shell: scl enable devtoolset-9 bash
       run: ./xrt/build/build.sh -opt
-      
-      
