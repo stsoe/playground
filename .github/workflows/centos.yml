@@ -9,6 +9,9 @@ jobs:
          centos: ["7"]
     container:
       image: centos:${{ matrix.centos }}
+      env:
+        CC: /opt/rh/devtoolset-9/root/usr/bin/gcc
+        CXX: /opt/rh/devtoolset-9/root/usr/bin/g++
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -20,5 +23,6 @@ jobs:
     - name: install dependencies
       run: ./xrt/src/runtime_src/tools/scripts/xrtdeps.sh
     - name: build
-      shell: scl enable devtoolset-9 bash
-      run: ./xrt/build/build.sh -opt
+      run: |
+        PATH="/opt/rh/devtoolset-9/root/usr/bin:${PATH:-}"
+        ./xrt/build/build.sh -opt
