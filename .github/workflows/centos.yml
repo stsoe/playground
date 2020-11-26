@@ -1,0 +1,25 @@
+on: [push]
+
+jobs:
+  xrt_centos:
+    runs-on: ubuntu-latest
+    strategy:
+       fail-fast: true
+       matrix:
+         centos: ["7"]
+    container:
+      image: centos:${{ matrix.centos }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Checkout XRT
+      uses: actions/checkout@v2
+      with:
+        repository: stsoe/XRT
+        path: ./xrt
+    - name: install dependencies
+      run: sudo ./xrt/src/runtime_src/tools/scripts/xrtdeps.sh
+    - name: build
+      run: ./xrt/build/build.sh -opt
+      
+      
