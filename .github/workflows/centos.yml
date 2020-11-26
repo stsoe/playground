@@ -4,7 +4,7 @@ jobs:
   xrt_centos:
     runs-on: ubuntu-latest
     strategy:
-       fail-fast: true
+       fail-fast: false
        matrix:
          centos: ["7"]
     container:
