@@ -1,3 +1,5 @@
+on: workflow_dispatch
+
 jobs:
   xrt_coverity_scan:
     runs-on: ubuntu-latest
