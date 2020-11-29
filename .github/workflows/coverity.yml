@@ -7,7 +7,7 @@ jobs:
     - name: Checkout playground
       uses: actions/checkout@v2
     - name: Checkout XRT
-      run: git clone https://github.com/Xilinx/XRT .
+      run: git clone https://github.com/Xilinx/XRT
     - name: Download and extract Coverity Build Tool
       run: |
         wget -q https://scan.coverity.com/download/cxx/linux64 --post-data "token=$TOKEN&project=Xilinx/XRT" -O cov-analysis-linux64.tar.gz
