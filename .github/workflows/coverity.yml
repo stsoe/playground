@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo ./XRT/src/runtime_src/tools/scripts.xrtdeps.sh
+        sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
     - name: Build with cov-build
       run: |
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
