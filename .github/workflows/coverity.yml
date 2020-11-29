@@ -24,14 +24,14 @@ jobs:
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
         cov-configure --template --config config/conf.xml --compiler c++
         cov-configure --template --config config/conf.xml --compiler gcc
-        cov-build --dir cov-int make --config config/conf.xml XRT/build.sh -opt -driver
+        cov-build --dir cov-int --config config/conf.xml XRT/build.sh -opt -driver
     - name: Submit the results to Coverity Scan
       run: |
         tar czvf xrt.tgz cov-int
         curl \
           --form project=Xilinx/XRT \
           --form token=$TOKEN \
-          --form email=soren.soe@xilinx.com
+          --form email=soren.soe@xilinx.com \
           --form version=trunk \
           --form description="Xilinx Runtime" \
           https://scan.coverity.com/builds?project=Xilinx/XRT
