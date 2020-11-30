@@ -27,7 +27,7 @@ jobs:
         cov-configure --comptype gcc --config config/conf.xml --compiler /usr/bin/c++
         cov-configure --comptype gcc --config config/conf.xml --compiler g++
         cov-configure --comptype gcc --config config/conf.xml --compiler gcc
-#        cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose -driver
+        # cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose -driver
         cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose
     - name: Submit the results to Coverity Scan
       run: |
