@@ -22,6 +22,7 @@ jobs:
         sudo apt update
         sudo apt install gcc g++
         sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
+        sudo apt install linux-modules-extra-`uname -r`
     - name: Build with cov-build
       run: |
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
