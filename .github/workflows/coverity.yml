@@ -24,7 +24,7 @@ jobs:
     - name: Build with cov-build
       run: |
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-        cov-configure --template --comptype gcc --config config/conf.xml --compiler /usr/bin/c++
+        cov-configure --template --comptype gcc --config config/conf.xml --compiler c++
         cov-configure --template --comptype gcc --config config/conf.xml --compiler g++
         cov-configure --template --comptype gcc --config config/conf.xml --compiler gcc
         cov-build --dir cov-int --config config/conf.xml g++ hello.cpp
