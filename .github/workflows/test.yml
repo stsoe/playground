@@ -11,6 +11,7 @@ jobs:
     - name: Install dependencies
       run: |
         uname -r
+        sudo pat install linux-modules-extra-5.4.0-1031-generic
     #   run: |
     #     sudo apt update
     #     sudo apt install gcc g++
