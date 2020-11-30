@@ -27,7 +27,7 @@ jobs:
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
         cov-configure --template --comptype gcc --config config/conf.xml --compiler c++
         cov-configure --template --comptype gcc --config config/conf.xml --compiler gcc
-        cov-build --dir cov-int --config config/conf.xml g++ hello.cpp
+        cov-build --dir cov-int --config config/conf.xml g++ src/hello.cpp
     #     cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose -driver
     #     cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose
     # - name: Submit the results to Coverity Scan
