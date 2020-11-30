@@ -34,8 +34,6 @@ jobs:
         cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose
     - name: Submit the results to Coverity Scan
       run: |
-        tar czvf xrt.tgz cov-int config/conf.xml
-      run: |
         tar czvf xrt.tgz cov-int
         curl \
           --form project=Xilinx/XRT \
