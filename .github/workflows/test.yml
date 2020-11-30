@@ -9,13 +9,14 @@ jobs:
     - name: Checkout playground
       uses: actions/checkout@v2
     - name: Checkout XRT
-      run: git clone https://github.com/Xilinx/XRT
-    - name: Install dependencies
-      run: |
-        sudo apt update
-        sudo apt install gcc g++
-        sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
-        sudo apt install linux-modules-extra-`uname -r`
-    - name: Build
-      run: |
-        XRT/build/build.sh -opt -verbose -driver
+      run: cat /boot/config-`uname -r`
+    #   run: git clone https://github.com/Xilinx/XRT
+    # - name: Install dependencies
+    #   run: |
+    #     sudo apt update
+    #     sudo apt install gcc g++
+    #     sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
+    #     sudo apt install linux-modules-extra-`uname -r`
+    # - name: Build
+    #   run: |
+    #     XRT/build/build.sh -opt -verbose -driver
