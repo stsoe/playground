@@ -39,5 +39,5 @@ jobs:
           --form version=trunk \
           --form description="Xilinx Runtime" \
           https://scan.coverity.com/builds?project=Xilinx/XRT
-        env:
-          TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
+      env:
+        TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
