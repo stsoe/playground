@@ -9,7 +9,11 @@ jobs:
     - name: Checkout playground
       uses: actions/checkout@v2
     - name: Checkout XRT
-      run: git clone https://github.com/Xilinx/XRT
+      uses: actions/checkout@v2
+      with:
+        repository: stsoe/XRT
+        path: ./XRT
+        ref: coverity
     - name: Download and extract Coverity Build Tool
       run: |
         wget -q https://scan.coverity.com/download/cxx/linux64 --post-data "token=$TOKEN&project=Xilinx/XRT" -O cov-analysis-linux64.tar.gz
@@ -22,7 +26,6 @@ jobs:
         sudo apt update
         sudo apt install gcc g++
         sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
-        sudo apt install linux-modules-extra-`uname -r`
     - name: Build with cov-build
       run: |
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
@@ -32,18 +35,18 @@ jobs:
     - name: Submit the results to Coverity Scan
       run: |
         tar czvf xrt.tgz cov-int config/conf.xml
-      # run: |
-      #   tar czvf xrt.tgz cov-int
-      #   curl \
-      #     --form project=Xilinx/XRT \
-      #     --form token=$TOKEN \
-      #     --form email=soren.soe@xilinx.com \
-      #     --form file=@xrt.tgz \
-      #     --form version=trunk \
-      #     --form description="Xilinx Runtime" \
-      #     https://scan.coverity.com/builds?project=Xilinx/XRT
-      # env:
-      #   TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
+      run: |
+        tar czvf xrt.tgz cov-int
+        curl \
+          --form project=Xilinx/XRT \
+          --form token=$TOKEN \
+          --form email=soren.soe@xilinx.com \
+          --form file=@xrt.tgz \
+          --form version=trunk \
+          --form description="Xilinx Runtime" \
+          https://scan.coverity.com/builds?project=Xilinx/XRT
+      env:
+        TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
     - name: Upload Coverity imed
       uses: actions/upload-artifact@v1
       with:
