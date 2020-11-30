@@ -24,20 +24,21 @@ jobs:
     - name: Build with cov-build
       run: |
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-        cov-configure --comptype gcc --config config/conf.xml --compiler /usr/bin/c++
-        cov-configure --comptype gcc --config config/conf.xml --compiler g++
-        cov-configure --comptype gcc --config config/conf.xml --compiler gcc
-        # cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose -driver
-        cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose
-    - name: Submit the results to Coverity Scan
-      run: |
-        tar czvf xrt.tgz cov-int
-        curl \
-          --form project=Xilinx/XRT \
-          --form token=$TOKEN \
-          --form email=soren.soe@xilinx.com \
-          --form version=trunk \
-          --form description="Xilinx Runtime" \
-          https://scan.coverity.com/builds?project=Xilinx/XRT
-      env:
-        TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
+        cov-configure --template --comptype gcc --config config/conf.xml --compiler /usr/bin/c++
+        cov-configure --template --comptype gcc --config config/conf.xml --compiler g++
+        cov-configure --template --comptype gcc --config config/conf.xml --compiler gcc
+        cov-build --dir cov-int --config config/conf.xml g++ hello.cpp
+    #     cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose -driver
+    #     cov-build --dir cov-int --config config/conf.xml XRT/build/build.sh -opt -verbose
+    # - name: Submit the results to Coverity Scan
+    #   run: |
+    #     tar czvf xrt.tgz cov-int
+    #     curl \
+    #       --form project=Xilinx/XRT \
+    #       --form token=$TOKEN \
+    #       --form email=soren.soe@xilinx.com \
+    #       --form version=trunk \
+    #       --form description="Xilinx Runtime" \
+    #       https://scan.coverity.com/builds?project=Xilinx/XRT
+    #   env:
+    #     TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
