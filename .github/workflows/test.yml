@@ -8,6 +8,8 @@ jobs:
       run: cat /usr/include/linux/version.h
     - name: Checkout playground
       uses: actions/checkout@v2
+    - name: Checkout XRT
+      run: git clone https://github.com/Xilinx/XRT
     - name: Install dependencies
       run: |
         sudo apt update
