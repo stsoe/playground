@@ -16,8 +16,8 @@ jobs:
         path: sha
         key: commit-${{ github.sha }}
     - name: hit
-      if: test.cache.outputs.cache-hit == 'true'
+      if: steps.cache.outputs.cache-hit == 'true'
       run: echo "cache hit"
     - name: miss
-      if: test.cache.outputs.cache-hit == 'true'
+      if: steps.cache.outputs.cache-hit == 'true'
       run: echo "cache miss"
