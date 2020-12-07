@@ -13,4 +13,6 @@ jobs:
         repository: stsoe/XRT
         path: ./xrt
     - name: install dependencies
-      run: ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py --icd --opencl
+      run: |
+        ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py --icd --opencl
+        ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py
