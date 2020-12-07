@@ -20,5 +20,5 @@ jobs:
       run: python -c "import sys; print(sys.version)"
     - name: install dependencies
       run: |
-        ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py --icd --opencl
-        ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py
+        python ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py --icd --opencl
+        python ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py
