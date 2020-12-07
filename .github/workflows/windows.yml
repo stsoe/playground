@@ -1,0 +1,16 @@
+on: workflow_dispatch
+
+jobs:
+  xrt_job:
+    runs-on: windows-2019
+    name: A job to retrieve XRT
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Checkout XRT
+      uses: actions/checkout@v2
+      with:
+        repository: stsoe/XRT
+        path: ./xrt
+    - name: install dependencies
+      run: ./xrt/src/runtime_src/tools/scripts/xrtdeps-win.py --icd --opencl
