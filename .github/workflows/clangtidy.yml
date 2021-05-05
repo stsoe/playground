@@ -7,6 +7,10 @@ jobs:
     steps:
     - name: Checkout XRT
       uses: actions/checkout@v2
+      with:
+        repository: stsoe/XRT
+        path: ./XRT
+        ref: clangtidy
     - name: Store sha
       run: echo ${{ github.sha }} > sha
     - name: Compare sha
@@ -19,11 +23,11 @@ jobs:
       if: steps.cache-sha.outputs.cache-hit != 'true'
       run: |
         sudo apt update
-        sudo src/runtime_src/tools/scripts/xrtdeps.sh
+        sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
     - name: Build with clangtidy
       if: steps.cache-sha.outputs.cache-hit != 'true'
       run: |
-        build/build.sh -clangtidy -opt |& tee build.clangtidy.log
+        XRT/build/build.sh -clangtidy -opt |& tee build.clangtidy.log
     - name: Upload Coverity imed
       if: steps.cache-sha.outputs.cache-hit != 'true'
       uses: actions/upload-artifact@v1
