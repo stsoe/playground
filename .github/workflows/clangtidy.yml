@@ -4,7 +4,6 @@ jobs:
   clangtidy:
     runs-on: ubuntu-latest
     # Only run in main repository as Coverity scans are limitted              
-    if: github.repository == 'Xilinx/XRT'
     steps:
     - name: Checkout XRT
       uses: actions/checkout@v2
