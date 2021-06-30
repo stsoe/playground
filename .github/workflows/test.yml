@@ -16,14 +16,21 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    if: github.event_name == 'pull_request'
     - name: Checkout playground
+      if: github.event_name == 'pull_request'
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    if: github.event_name == 'workflow_dispatch'
     - name: Checkout playground
+      if: github.event_name == 'workflow_dispatch'
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.inputs.sha }}
+
+    - name: Run test
+      if: github.event_name == 'pull_request'
+      run: echo "pull request test"
+
+      if: github.event_name == 'workflow_dispatch'
+      run: echo "dispatch test"
