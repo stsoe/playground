@@ -1,22 +1,29 @@
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      msg:
+        description: input a message
+        default: hello
+      sha:
+        description: Sha of pull request
+        default: 0
+        required: true
+
+  pull_request:
 
 jobs:
-  xrt_coverity_scan:
+  my_test:
     runs-on: ubuntu-20.04
+
     steps:
-    - name: List linux/version.h
-      run: cat /usr/include/linux/version.h
     - name: Checkout playground
+      if: github.event_name == 'pull_request'
       uses: actions/checkout@v2
-    - name: Checkout XRT
-      run: cat /boot/config-`uname -r`
-    #   run: git clone https://github.com/Xilinx/XRT
-    # - name: Install dependencies
-    #   run: |
-    #     sudo apt update
-    #     sudo apt install gcc g++
-    #     sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
-    #     sudo apt install linux-modules-extra-`uname -r`
-    # - name: Build
-    #   run: |
-    #     XRT/build/build.sh -opt -verbose -driver
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Checkout playground
+      if: github.event_name == 'workflow_dispatch'
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.inputs.sha }}
