@@ -10,8 +10,8 @@ on:
         description: Pull request to review
         default: 0
         required: true
-
-#  pull_request:
+        
+  pull_request:
 
 jobs:
   validate_files:
