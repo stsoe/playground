@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(main)
 
-<<<<<<< Updated upstream
 add_executable(main main.cpp)
-=======
+
 add_custom_command(
   OUTPUT gc.txt
   COMMAND touch gc.txt
@@ -13,7 +12,6 @@ add_custom_target(pcie_emulation_generated_code DEPENDS gc.txt)
 add_custom_target(edge_emulation_generated_code DEPENDS gc.txt)
 
 add_executable(main hello.cpp)
->>>>>>> Stashed changes
 
 install(TARGETS main)
 
