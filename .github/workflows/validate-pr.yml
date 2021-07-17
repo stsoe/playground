@@ -29,7 +29,7 @@ jobs:
         FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .raw_url')
         for f in ${FILES[*]}; do
           echo "checking $f ..."
-          if ! curl -I $f | grep "content-type:" | grep -q "text/"; then
+          if ! $(curl -s -L -I $f | grep "content-type:" | tail -1 | grep -q "text/"); then
             echo "$f is not a text file"
           fi
         done
