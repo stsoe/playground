@@ -31,5 +31,6 @@ jobs:
           echo "checking $f ..."
           if ! $(curl -s -L -I $f | grep "content-type:" | tail -1 | grep -q "text/"); then
             echo "$f is not a text file"
+            exit 1
           fi
         done
