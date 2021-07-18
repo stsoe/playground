@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (C) 2019-2021 Xilinx, Inc. All rights reserved.
 
-name: validate pull request
+name: Check File Encoding
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ on:
   pull_request:
 
 jobs:
-  validate_files:
+  binary_check:
     runs-on: ubuntu-latest
     steps:
 
