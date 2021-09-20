@@ -12,7 +12,7 @@ Added
 * Improved error reporting.
 * Legacy commands have been deprecated.
 * Various report output improvements.
-* ``xbutil configure`` root level command introduced.  Added ``host_mem`` and ``p2p``.
+* ``xbutil configure`` *root* level command introduced.  Added ``host_mem`` and ``p2p``.
 * ``--force`` option support for all operations
 * ``xbutil validate`` now supports alternative platform validation directories
 
