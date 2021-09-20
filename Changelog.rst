@@ -33,14 +33,14 @@ Added
 
 **Other changes**
 
-* Added missing ``:`` separator in regex when matching the kernel name specified to ``clCreateKernel`` and ``xrt::kernel``.  Without the separator, matching would fail when a specified kernel name is a substring of other kernel name.  The default regex is now ``"(kernelname):(.*)"``.
+* Added missing ``:`` separator in regex when matching the kernel name specified to ``clCreateKernel`` and ``xrt::kernel``.  Without the separator, matching would fail when a specified kernel name is a substring of another kernel name.  The default regex is now ``"(kernelname):(.*)"``.
 * Fix register read and write in HW emulation to use the CU index ordering as rest of XRT.
 * Fix bugs related to kernel address range size (1) support custom address range size, (2) trap error when writing outside the kernel address range.
-* Support enabled for RHEL 8.4 and Ubuntu 20.04.2 OS
+* Support enabled for ``RHEL 8.4`` and ``buntu 20.04.2`` OS
 * zocl memory manager improvements to support any sptag.
 
 Removed
 .......
 
 * xclExecBufWithWaitList() API is deprecated and will be removed in future release
-* Support is removed for  RHEL/Centos 7.6 , 7.7  & Ubuntu 16.04
+* Support is removed for  ``RHEL/Centos 7.6`` , ``7.7``  & ``Ubuntu 16.04``
