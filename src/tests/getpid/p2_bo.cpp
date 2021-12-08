@@ -1,3 +1,4 @@
+#include "xrt/xrt_device.h"
 #include "xrt/xrt_bo.h"
 
 #include <sys/syscall.h>
@@ -36,13 +37,14 @@ run(int argc, char* argv[])
 
   std::cout << "p2 imported fd: " << fd << "\n";
 
-  char buf[128] = {0};
-  while (read(fd, buf, 128)) {
-    std::cout << "buf: " << buf << std::flush;
-  }
-  
-  close(fd);
-  close(fd_local);
+  xrt::device device(0);
+  xrt::bo bo(device, fd);
+
+  auto bo_map = bo.map<char*>();
+
+
+  bo.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
+  std::cout << "bo: " << bo_map << '\n';
 
   return 0;
 }

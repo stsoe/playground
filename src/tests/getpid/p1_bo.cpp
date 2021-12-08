@@ -10,7 +10,11 @@ int main()
   std::cout << "p1 pid: " << pid << "\n";
 
   xrt::device device(0);
-  xrt::bo bo(device, 4096, 1);
+  xrt::bo bo(device, 4096, xrt::bo::flags::cacheable, 1);
+
+  auto bo_map = bo.map<char*>();
+  strcpy(bo_map, "hello from p1");
+  bo.sync(XCL_BO_SYNC_BO_TO_DEVICE);
 
   auto ehdl = bo.export_buffer();
   std::cout << "p1 bo fd: " << ehdl << '\n';
