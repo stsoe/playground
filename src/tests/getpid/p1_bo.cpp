@@ -13,14 +13,15 @@ int main()
   xrt::bo bo(device, 4096, xrt::bo::flags::cacheable, 1);
 
   auto bo_map = bo.map<char*>();
-  strcpy(bo_map, "hello from p1");
+  strncpy(bo_map, "hello from p1", bo.size());
   bo.sync(XCL_BO_SYNC_BO_TO_DEVICE);
 
   auto ehdl = bo.export_buffer();
   std::cout << "p1 bo fd: " << ehdl << '\n';
 
   while (1) {
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    std::cout << "1" << std::flush;
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    bo.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
+    std::cout << bo_map << '\n';
   }
 }
