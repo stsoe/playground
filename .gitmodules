@@ -1,3 +1,6 @@
 [submodule "xrt"]
 	path = xrt
 	url = git@github.com:Xilinx/XRT.git
+[submodule "glfw"]
+	path = glfw
+	url = git@github.com:glfw/glfw.git
