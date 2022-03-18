@@ -4,3 +4,6 @@
 [submodule "XRT"]
 	path = XRT
 	url = git@github.com:stsoe/XRT.git
+[submodule "xrt"]
+	path = xrt
+	url = git@github.com:stsoe/XRT.git
