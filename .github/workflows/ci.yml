@@ -28,7 +28,7 @@ jobs:
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
       run: |
-        vcpkg install boost-format:x64
+        vcpkg install boost-format:x64-windows
 
     - name: Configure CMake
       run: |
