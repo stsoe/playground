@@ -1,4 +1,4 @@
-find_package(Boost REQUIRED COMPONENTS uuid property_tree interprocess format algorithm)
+find_package(Boost REQUIRED)
 message("-- Boost_INCLUDE_DIRS=${Boost_INCLUDE_DIRS}")
 
 add_executable(main hello.cpp)
