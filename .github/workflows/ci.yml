@@ -28,7 +28,7 @@ jobs:
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
       run: |
-        vcpkg install boost-format:x64-windows-static-md
+        vcpkg install boost-format:x64
 
     - name: Configure CMake
       run: |
@@ -40,4 +40,4 @@ jobs:
 
     - name: Test
       run: |
-        ${{github.workspace}}/build/Release/bin/main.exe
+        ${{github.workspace}}/build/Release/bin/main
