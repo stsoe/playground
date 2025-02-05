@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+
+#include <boost/format.hpp>
 
 int main()
 {
