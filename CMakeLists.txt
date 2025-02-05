@@ -16,7 +16,7 @@ message("-- Install prefix is set to ${CMAKE_INSTALL_PREFIX}")
 
 add_subdirectory(src)
 #add_subdirectory(glfw)
-add_subdirectory(xrt)
+#add_subdirectory(xrt)
 
 #message("--cii=${CMAKE_INSTALL_INCLUDEDIR}")
 #message("--gdb=${GLFW_BINARY_DIR}")
