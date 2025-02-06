@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         #os: [ubuntu-latest, windows-latest]
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -31,7 +31,7 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         vcpkg integrate install
-        vcpkg install boost-headers --triplet=x64-windows
+        vcpkg install boost-format boost-property-tree boost-interprocess boost-headers --triplet=x64-windows
         cmake -B ${{github.workspace}}/build/Release -DCMAKE_INSTALL_PREFIX=build/Release -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
