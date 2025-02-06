@@ -28,6 +28,7 @@ jobs:
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
       run: |
+        vcpkg integrate install
         vcpkg install boost-headers --triplet=x64-windows
 
     - name: Configure CMake
