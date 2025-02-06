@@ -11,6 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
+        #os: [ubuntu-latest, windows-latest]
         os: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
@@ -19,21 +20,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install Dependencies (Linux)
+    - name: Install Dependencies (Linux) and configure cmake
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
         sudo apt-get install -y pkg-config libelf-dev libboost-dev
+        cmake -B ${{github.workspace}}/build/Release -DCMAKE_INSTALL_PREFIX=build/Release
 
-    - name: Install Dependencies (Windows)
+    - name: Install Dependencies (Windows) and configure cmake
       if: runner.os == 'Windows'
       run: |
         vcpkg integrate install
         vcpkg install boost-headers --triplet=x64-windows
-
-    - name: Configure CMake
-      run: |
-        cmake -B ${{github.workspace}}/build/Release -DCMAKE_INSTALL_PREFIX=build/Release
+        cmake -B ${{github.workspace}}/build/Release -DCMAKE_INSTALL_PREFIX=build/Release -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
       run: |
