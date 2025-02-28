@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2024-2025 Advanced Micro Devices, Inc. All rights reserved.
 ---
 # The following configuration was generated with --dump-config and then manually tweaked to suit XRT coding style.
 # The command line used to generate the global src/.clang-tidy is:
@@ -5,6 +7,7 @@
 # clang-tidy looks for .clang-tidy file walking up the source directory structure to identify which checks to run
 # One can customize checks in specific source directories by placing custom .clang-tidy in those source directories
 Checks: '
+readability-const-return-type,
 clang-diagnostic-*,
 clang-analyzer-*,
 cert-*,
@@ -26,7 +29,6 @@ modernize-*,
 
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
-AnalyzeTemporaryDtors: false
 FormatStyle:     none
 User:            sonals
 CheckOptions:
