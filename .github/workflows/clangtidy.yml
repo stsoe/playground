@@ -37,7 +37,8 @@ jobs:
         clang-tidy-diff -p1 -path build -export-fixes build/Release/clang-tidy-fixes.yml
 
     - name: Post clang-tidy comments
-      uses: ZedThree/clang-tidy-review@v0.20.1
+      #uses: ZedThree/clang-tidy-review@v0.20.1
+      uses: stsoe/clang-tidy-review@6d2aee59f56cf41f32baa4123cc636fff8ef4eb7
       with:
         build_dir: build/Release
         token: ${{ secrets.GITHUB_TOKEN }}
