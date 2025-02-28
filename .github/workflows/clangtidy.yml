@@ -33,7 +33,7 @@ jobs:
 
     - name: Run clang-tidy
       run: |
-        git diff -U0 origin/${{ github.base_ref }}...HEAD \
+        git diff -U0 origin/${{ github.base_ref }}...HEAD | \
         clang-tidy-diff -p1 -path build -export-fixes build/Release/clang-tidy-fixes.yml
 
     - name: Post clang-tidy comments
