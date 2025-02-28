@@ -21,7 +21,7 @@ jobs:
 
     - name: Install clang-tidy
       run: |
-        sudo apt get install -y clang-tidy
+        sudo apt install -y clang-tidy
 
     - name: Build and generate compile_commands.json
       run: |
@@ -33,11 +33,18 @@ jobs:
 
     - name: Run clang-tidy
       run: |
-        git diff -U0 origin/${{ github.base_ref }}...HEAD \
+        git diff -U0 origin/${{ github.base_ref }}...HEAD | \
         clang-tidy-diff -p1 -path build -export-fixes build/Release/clang-tidy-fixes.yml
 
     - name: Post clang-tidy comments
-      uses: ZedThree/clang-tidy-review@v0.20.1
+      #uses: ZedThree/clang-tidy-review@v0.20.1
+      uses: stsoe/clang-tidy-review@6d2aee59f56cf41f32baa4123cc636fff8ef4eb7
       with:
-        clang_tidy_fixes: build/Release/clang-tidy-fixes.yml
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        build_dir: build/Release
+        # disable default checks and rely on closest .clangtidy
+        clang_tidy_checks: ''
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    # If there are any comments, fail the check
+    - if: steps.review.outputs.total_comments > 0
+      run: exit 1
