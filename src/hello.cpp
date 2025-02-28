@@ -16,7 +16,7 @@ public:
 
 std::string hello()
 {
-  std::string str = "hello";
+  std::string const str = "hello";
   X x(str);
   return x.get_string();
 }
