@@ -14,7 +14,7 @@ public:
   }
 };
 
-const std::string hello()
+std::string hello()
 {
   std::string str = "hello";
   X x(str);
