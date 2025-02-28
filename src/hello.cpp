@@ -23,6 +23,6 @@ std::string hello()
 
 int main()
 {
-  std::cout << hello() << std::endl;
+  std::cout << hello() << '\n';
   return 0;
 }
