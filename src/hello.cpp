@@ -7,7 +7,7 @@ class X
 public:
   X(const std::string& str) : m_string(str) {}
 
-  const std::string
+  std::string
   get_string()
   {
     return m_string;
