@@ -1,36 +1,43 @@
-on: workflow_dispatch
+name: Clang-Tidy Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: main
     
+  workflow_dispatch:
+
 jobs:
   clangtidy:
     runs-on: ubuntu-latest
-    # Only run in main repository as Coverity scans are limitted              
     steps:
-    - name: Checkout XRT
-      uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v4
       with:
-        repository: stsoe/XRT
-        path: ./XRT
-        ref: clangtidy
-    - name: Store sha
-      run: echo ${{ github.sha }} > sha
-    - name: Compare sha
-      uses: actions/cache@v2
-      id: cache-sha
-      with:
-        path: sha
-        key: commit-${{ github.sha }}
-    - name: Install dependencies
-      if: steps.cache-sha.outputs.cache-hit != 'true'
+        fetch-depth: 0
+    - name: Fetch base branch
       run: |
-        sudo apt update
-        sudo ./XRT/src/runtime_src/tools/scripts/xrtdeps.sh
-    - name: Build with clangtidy
-      if: steps.cache-sha.outputs.cache-hit != 'true'
+        git fetch origin ${{ github.base_ref }}
+
+    - name: Install clang-tidy
       run: |
-        XRT/build/build.sh -clangtidy -opt |& tee build.clangtidy.log
-    - name: Upload Coverity imed
-      if: steps.cache-sha.outputs.cache-hit != 'true'
-      uses: actions/upload-artifact@v1
+        sudo apt get install -y clang-tidy
+
+    - name: Build and generate compile_commands.json
+      run: |
+        cmake -B build/Release \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+        -DCMAKE_INSTALL_PREFIX=build/Release
+        cmake --build build/Release --config Release
+
+    - name: Run clang-tidy
+      run: |
+        git diff -U0 origin/${{ github.base_ref }}...HEAD \
+        clang-tidy-diff -p1 -path build -export-fixes build/Release/clang-tidy-fixes.yml
+
+    - name: Post clang-tidy comments
+      uses: ZedThree/clang-tidy-review@v0.20.1
       with:
-        name: clang tidy build log
-        path: build.clangtidy.log
+        clang_tidy_fixes: build/Release/clang-tidy-fixes.yml
+        github_token: ${{ secrets.GITHUB_TOKEN }}
